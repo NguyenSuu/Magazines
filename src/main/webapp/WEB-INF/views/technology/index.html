@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/views/layout::link"></th:block>
+    <link rel="stylesheet" type="text/css" href="/template/styles/category.css">
+    <link rel="stylesheet" type="text/css" href="/template/styles/category_responsive.css">
+</head>
+<body>
+<div class="super_container">
+    <header th:insert="/views/layout::header"></header>
+    <th:block th:insert="/views/layout::home-technology"></th:block>
+    <div class="content_container">
+
+        <!-- Featured Posts -->
+        <div class="featured_title">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="section_title_container d-flex flex-row align-items-start justify-content-start">
+                            <div>
+                                <div class="section_title">Featured Posts</div>
+                                <div class="section_subtitle">Handpicked articles</div>
+                            </div>
+                            <div class="section_bar"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <th:block th:each="top1View,iter:${listViewDESC}">
+                    <th:block th:if="${iter.index+1==1}">
+                        <div class="row">
+                            <div class="col">
+                                <div class="featured_posts">
+
+                                    <!-- Post -->
+                                    <div class="featured_post post_h_large">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="featured_post_image"><img
+                                                        th:src="@{/images/}+${top1View.image}" alt="" width="450px" height="370px"></div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="post_content">
+                                                    <div class="post_category cat_technology"><a
+                                                            th:href="@{/}+${top1View.category.name}"
+                                                            th:text="${top1View.category.name}"></a>
+                                                    </div>
+                                                    <div class="post_title"><a
+                                                            th:href="@{/}+${top1View.category.name}+@{/}+${top1View.id}"
+                                                            th:text="${top1View.title}"></a></div>
+                                                    <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                                                        <div class="post_author d-flex flex-row align-items-center justify-content-start">
+                                                            <div>
+                                                                <div class="post_author_image"><img
+                                                                        src="/template/images/author_1.jpg" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="post_author_name"><a
+                                                                    th:text="${top1View.author}"></a></div>
+                                                        </div>
+                                                        <div class="post_date" th:text="${top1View.time}"></div>
+                                                        <!--                                                        <div class="post_comments ml-auto"><a href="#">3 comments</a>-->
+                                                    </div>
+                                                    <div class="post_text" th:text="${top1View.summary}">
+                                                    </div>
+                                                </div>
+                                                <div class="post_button trans_200"><a
+                                                        th:href="@{/}+${top1View.category.name}+@{/}+${top1View.id}">read
+                                                    more</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </th:block>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="posts">
+                            <div th:id="list"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div>
+                            <div class="sidebar">
+                                <!-- Latest Posts -->
+                                <div class="sidebar_latest">
+                                    <div class="sidebar_title">Latest Posts</div>
+                                    <div class="latest_posts">
+                                        <th:block th:each="posts,iter:${postsTopNew}">
+                                            <!-- Latest Post -->
+                                            <div class="latest_post d-flex flex-row align-items-start justify-content-start">
+                                                <div>
+                                                    <div class="latest_post_image"><img
+                                                            th:src="@{/images/}+${posts.image}"
+                                                            alt="" style="width: 103px;height: 118px">
+                                                    </div>
+                                                </div>
+                                                <div class="latest_post_content">
+                                                    <th:block th:if="${posts.category.name}=='fashion'">
+                                                        <div class="post_category_small cat_world"><a
+                                                                th:href="@{/}+${posts.category.name}"
+                                                                th:text="${posts.category.name}"></a>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:if="${posts.category.name}=='technology'">
+                                                        <div class="post_category_small cat_technology"><a
+                                                                th:href="@{/}+${posts.category.name}"
+                                                                th:text="${posts.category.name}"></a></div>
+                                                    </th:block>
+                                                    <div class="latest_post_title"><a
+                                                            th:href="@{/}+${posts.category.name}+@{/}+${posts.id}"
+                                                            th:text="${posts.title}"></a></div>
+                                                    <div class="latest_post_date" th:text="${posts.time}"></div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+
+                                <!-- Most Viewed -->
+
+                                <div class="most_viewed">
+                                    <div class="sidebar_title">Most Viewed</div>
+                                    <div class="most_viewed_items">
+                                        <th:block th:each="posts,iter:${postsTopViews}">
+                                            <!-- Most Viewed Item -->
+                                            <div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
+                                                <div>
+                                                    <div class="most_viewed_num"
+                                                         th:text="'0'+${iter.index+1}+'.'"></div>
+                                                </div>
+                                                <div class="most_viewed_content">
+                                                    <th:block th:if="${posts.category.name}=='fashion'">
+                                                        <div class="post_category_small cat_world"><a
+                                                                th:href="@{/}+${posts.category.name}"
+                                                                th:text="${posts.category.name}"></a>
+                                                        </div>
+                                                    </th:block>
+                                                    <th:block th:if="${posts.category.name}=='technology'">
+                                                        <div class="post_category_small cat_technology"><a
+                                                                th:href="@{/}+${posts.category.name}"
+                                                                th:text="${posts.category.name}"></a></div>
+                                                    </th:block>
+                                                    <div class="most_viewed_title"><a
+                                                            th:href="@{/}+${posts.category.name}+@{/}+${posts.id}"
+                                                            th:text="${posts.title}"></a></div>
+                                                    <div class="most_viewed_date" th:text="${posts.time}"></div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+
+                                <!-- Extra -->
+                                <div class="sidebar_extra">
+                                    <a href="#">
+                                        <div class="sidebar_title">Advertisement</div>
+                                        <div class="sidebar_extra_container">
+                                            <div class="background_image"
+                                                 style="background-image:url(/template/images/extra_2.jpg)"></div>
+                                            <div class="sidebar_extra_content">
+                                                <div class="sidebar_extra_title">30%</div>
+                                                <div class="sidebar_extra_title">off</div>
+                                                <div class="sidebar_extra_subtitle">Buy online now</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:insert="/views/layout::footer"></footer>
+</body>
+<th:block th:insert="/views/layout::js"></th:block>
+<script src="/template/js/category.js"></script>
+<script src="/ajax/views/technology.js"></script>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/layout::header">
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col" th:replace="admin/layout::app-navbar">
+
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav" th:replace="admin/layout::app-header">
+
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3 th:text="${assign}"></h3>
+                    </div>
+                    <div class="title_right">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="float-right"><a th:href="@{/admin/fashion/}"
+                                                        class="btn btn-primary">List</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <h2 th:utext="${title +'<small>' + assign + '</small>'}"></h2>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <th:block th:if="${message}">
+                                            <div th:class="${'alert ' + alert + ' alert-dismissible '}" role="alert"
+                                                 th:utext="${'<strong>'+assign+'</strong> '+ message}">
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix">
+
+                                </div>
+                            </div>
+                            <div class="x_content">
+                                <br/>
+                                <form class="form-horizontal form-label-left"
+                                      th:action="@{/admin/fashion/}+${action}" th:object="${fashion}"
+                                      method="post" enctype="multipart/form-data">
+                                    <input type="hidden" th:field="*{id}">
+                                    <div class="row" hidden>
+                                        <select th:field="*{category.id}">
+                                            <option th:value="${fashionCategory.id}"
+                                                    th:text="${fashionCategory.id}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <label class="control-label col-md-3 col-sm-3 ">Title:</label>
+                                        <div class="col-md-9 col-sm-9 ">
+                                            <input type="text" required class="form-control"
+                                                   placeholder="Title" th:field="*{title}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <label class="control-label col-md-3 col-sm-3 ">Summary:</label>
+                                        <div class="col-md-9 col-sm-9 ">
+                                            <input type="text" required class="form-control"
+                                                   placeholder="Summary" th:field="*{summary}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <label class="control-label col-md-3 col-sm-3 ">Author:</label>
+                                        <div class="col-md-9 col-sm-9 ">
+                                            <input type="text" required class="form-control"
+                                                   placeholder="Author" th:field="*{author}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <label class="control-label col-md-3 col-sm-3 ">HTMLDescription</label>
+                                        <div class="col-md-9 col-sm-9 ">
+                                            <textarea type="text" class="form-control"
+                                                      placeholder="Description"
+                                                      th:field="*{description}"></textarea>
+                                        </div>
+                                    </div>
+                                    <th:block th:if="${action=='edit'}">
+                                        <div class="form-group row ">
+                                            <label class="control-label col-md-3 col-sm-3 ">Current Image</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <input type="hidden" th:field="*{image}" class="form-control">
+                                                <img th:src="@{/images/__*{image}__}" class="image" height="120">
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                    <div class="form-group row ">
+                                        <label class="control-label col-md-3 col-sm-3 ">Image</label>
+                                        <div class="col-md-9 col-sm-9 ">
+                                            <input type="file" th:field="*{fileImage}" class="fileDatas form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9  offset-md-3">
+                                            <button type="reset" class="btn btn-primary">Reset</button>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer th:replace="admin/layout::app-footer">
+
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+<th:block th:replace="admin/layout::block-script">
+</th:block>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>
+<script>
+    $('#description').summernote({
+        placeholder: 'Main..',
+        tabsize: 2,
+        height: 200
+    });
+
+    function setImage() {
+        var s = $('.fileDatas').val();
+        var i = s.split('\\').pop().split('/').pop();
+        $('#imageShow').val(i);
+    }
+</script>
+</body>
+</html>

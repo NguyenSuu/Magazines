@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/views/layout::link"></th:block>
+    <link rel="stylesheet" type="text/css" href="/template/styles/contact.css">
+    <link rel="stylesheet" type="text/css" href="/template/styles/contact_responsive.css">
+</head>
+<body>
+<div class="super_container">
+
+<header th:insert="/views/layout::header"></header>
+<th:block th:insert="/views/layout::home-contact"></th:block>
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+
+                <!-- Contact Content -->
+                <div class="col-lg-4 contact_col">
+                    <div class="contact_content">
+                        <div class="contact_title">Get in Touch</div>
+                        <div class="contact_text">
+                            <p> Nullam vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero luctus, vel volutpat quam tincidunt. Nullam vestibulum convallis risus vel condimentum. Nullam auctor lorem in libero.Lorem ipsum dolor sit amet, consectetur adipiscin.</p>
+                        </div>
+                        <div class="contact_social">
+                            <ul class="contact_social_list d-flex flex-row align-items-center justify-content-start">
+                                <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="contact_info">
+                            <ul>
+                                <li class="d-flex flex-row align-items-center justify-content-start">
+                                    <div class="contact_info_box d-flex flex-column align-items-center justify-content-center">
+                                        <div class="contact_info_icon"><img src="/template/images/icon_9.svg" alt=""></div>
+                                    </div>
+                                    <div class="contact_info_content">28 Nguyen Tri Phuong,Thua Thien Hue</div>
+                                </li>
+                                <li class="d-flex flex-row align-items-center justify-content-start">
+                                    <div class="contact_info_box d-flex flex-column align-items-center justify-content-center">
+                                        <div class="contact_info_icon"><img src="/template/images/icon_10.svg" alt=""></div>
+                                    </div>
+                                    <div class="contact_info_content">0901175884</div>
+                                </li>
+                                <li class="d-flex flex-row align-items-center justify-content-start">
+                                    <div class="contact_info_box d-flex flex-column align-items-center justify-content-center">
+                                        <div class="contact_info_icon"><img src="/template/images/icon_11.svg" alt=""></div>
+                                    </div>
+                                    <div class="contact_info_content">suunguyen25121997@gmail.com</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-8 contact_col">
+                    <div class="contact_form_container">
+                        <div class="contact_title">Send us a message</div>
+                        <form th:action="@{/contact}" id="contact_form" class="contact_form" method="post" th:object="${mess}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="contact_input" placeholder="Name" required="required" th:field="*{writer}" >
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="contact_input" placeholder="E-mail" required="required" th:field="*{email}">
+                                </div>
+                            </div>
+                            <textarea class="contact_input contact_textarea" placeholder="Message" required="required" th:field="*{info}"></textarea>
+                            <button class="contact_button trans_200">submit</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div th:insert="/views/layout::map"></div>
+<footer th:insert="/views/layout::footer"></footer>
+</div>
+</body>
+<th:block th:insert="/views/layout::js"></th:block>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+<script src="/template/js/contact.js"></script>
+</html>

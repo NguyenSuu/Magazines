@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="/views/layout::link"></th:block>
+    <link rel="stylesheet" type="text/css" href="/template/styles/single.css">
+    <link rel="stylesheet" type="text/css" href="/template/styles/single_responsive.css">
+</head>
+<body>
+<div class="super_container">
+    <header th:insert="/views/layout::header"></header>
+    <div>
+        <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+            <div class="menu_close_container">
+                <div class="menu_close">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="search">
+                <form action="#" class="header_search_form menu_mm">
+                    <input type="search" class="search_input menu_mm" placeholder="Search" required="required">
+                    <button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
+                        <i class="fa fa-search menu_mm" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+            <nav class="menu_nav">
+                <ul class="menu_mm">
+                    <li class="menu_mm"><a href="/">Home</a></li>
+                    <li class="menu_mm"><a href="/technology">Tech</a></li>
+                    <li class="menu_mm"><a href="/fashion">Fashion</a></li>
+                    <li class="menu_mm"><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu_subscribe"><a href="#">Subscribe</a></div>
+            <div class="menu_extra">
+                <div class="menu_social">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home -->
+
+        <div class="home">
+            <div class="parallax_background parallax-window" data-parallax="scroll"
+                 data-image-src="/template/images/footer.jpg" data-speed="0.8"></div>
+            <div class="home_content_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="home_content">
+                                <div class="home_title" th:text="${technology.title}"></div>
+                                <div class="breadcrumbs">
+                                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/technology">Technology</a></li>
+                                        <li th:text="${technology.title}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content_container">
+        <div class="container">
+            <div class="row">
+
+                <!-- Single Post -->
+
+                <div class="col-lg-9">
+                    <div class="single_post">
+                        <div th:id="main"></div>
+<!--                        <div class="post_image"><img th:src="@{/images/}+${technology.image}" alt=""height="550px" width="690px"></div>-->
+<!--                        <div class="post_content">-->
+<!--                            <div class="post_category cat_technology"><a th:href="@{/}+${technology.category.name}"-->
+<!--                                                                         th:text="${technology.category.name}"></a>-->
+<!--                            </div>-->
+<!--                            <div class="post_title"><p th:text="${technology.title}"></p></div>-->
+<!--                            <div class="post_info d-flex flex-row align-items-center justify-content-start">-->
+<!--                                <div class="post_author d-flex flex-row align-items-center justify-content-start">-->
+<!--                                    <div>-->
+<!--                                        <div class="post_author_image"><img src="/template/images/author_1.jpg"-->
+<!--                                                                            alt=""></div>-->
+<!--                                    </div>-->
+<!--                                    <div class="post_author_name"><p th:text="${technology.author}"></p></div>-->
+<!--                                </div>-->
+<!--                                <div class="post_date" th:text="${technology.time}"></div>-->
+<!--                                <div class="post_comments_num ml-auto"><a th:text="${count}+' comment'"></a></div>-->
+<!--                            </div>-->
+<!--                            <div class="post_text">-->
+<!--                                <p th:utext="${technology.description}"></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <!-- Social Share -->
+                        <div class="post_share d-flex flex-row align-items-center justify-content-start">
+                            <div class="post_share_title">Share:</div>
+                            <ul class="post_share_list d-flex flex-row align-items-center justify-content-center">
+                                <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Comments -->
+                        <div class="post_comments_container">
+                            <div id="count"></div>
+
+                            <!-- Comments -->
+                            <div class="post_comments">
+
+                                <ul class="post_comments_list">
+                                    <input th:value="${technology.id}" th:id="idPosts" hidden>
+                                    <div th:id="message"></div>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <!-- Reply  -->
+                        <div class="reply_form_container">
+                            <div class="reply_form_title">Leave a reply</div>
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <input type="text" class="reply_input" placeholder="Name" id="writer"
+                                               required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="reply_input" placeholder="E-mail" id="email"
+                                               required>
+                                    </div>
+                                </div>
+                                <textarea class="reply_input reply_textarea" placeholder="Message" id="info"
+                                          required></textarea>
+                                <button class="reply_button trans_200" onclick="technology.saveMess()" >Submit</button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+
+                <div class="col-lg-3">
+                    <div>
+                        <div class="sidebar">
+                            <!-- Latest Posts -->
+                            <div class="sidebar_latest">
+                                <div class="sidebar_title">Latest Posts</div>
+                                <div class="latest_posts">
+                                    <th:block th:each="posts,iter:${postsTopNew}">
+                                        <!-- Latest Post -->
+                                        <div class="latest_post d-flex flex-row align-items-start justify-content-start">
+                                            <div>
+                                                <div class="latest_post_image"><img th:src="@{/images/}+${posts.image}"
+                                                                                    alt="" style="width: 103px;height: 118px">
+                                                </div>
+                                            </div>
+                                            <div class="latest_post_content">
+                                                <th:block th:if="${posts.category.name}=='fashion'">
+                                                    <div class="post_category_small cat_world"><a
+                                                            th:href="@{/}+${posts.category.name}"
+                                                            th:text="${posts.category.name}"></a>
+                                                    </div>
+                                                </th:block>
+                                                <th:block th:if="${posts.category.name}=='technology'">
+                                                    <div class="post_category_small cat_technology"><a
+                                                            th:href="@{/}+${posts.category.name}"
+                                                            th:text="${posts.category.name}"></a>
+                                                    </div>
+                                                </th:block>
+                                                <div class="latest_post_title"><a
+                                                        th:href="@{/}+${posts.category.name}+@{/}+${posts.id}"
+                                                        th:text="${posts.title}"></a></div>
+                                                <div class="latest_post_date" th:text="${posts.time}"></div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+
+                            <!-- Most Viewed -->
+
+                            <div class="most_viewed">
+                                <div class="sidebar_title">Most Viewed</div>
+                                <div class="most_viewed_items">
+                                    <th:block th:each="posts,iter:${postsTopViews}">
+                                        <!-- Most Viewed Item -->
+                                        <div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
+                                            <div>
+                                                <div class="most_viewed_num" th:text="'0'+${iter.index+1}+'.'"></div>
+                                            </div>
+                                            <div class="most_viewed_content">
+                                                <th:block th:if="${posts.category.name}=='fashion'">
+                                                    <div class="post_category_small cat_world"><a
+                                                            th:href="@{/}+${posts.category.name}"
+                                                            th:text="${posts.category.name}"></a>
+                                                    </div>
+                                                </th:block>
+                                                <th:block th:if="${posts.category.name}=='technology'">
+                                                    <div class="post_category_small cat_technology"><a
+                                                            th:href="@{/}+${posts.category.name}"
+                                                            th:text="${posts.category.name}"></a>
+                                                    </div>
+                                                </th:block>
+                                                <div class="most_viewed_title"><a
+                                                        th:href="@{/}+${posts.category.name}+@{/}+${posts.id}"
+                                                        th:text="${posts.title}"></a></div>
+                                                <div class="most_viewed_date" th:text="${posts.time}"></div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+
+                            <!-- Extra -->
+                            <div class="sidebar_extra">
+                                <a href="#">
+                                    <div class="sidebar_title">Advertisement</div>
+                                    <div class="sidebar_extra_container">
+                                        <div class="background_image"
+                                             style="background-image:url(/template/images/extra_2.jpg)"></div>
+                                        <div class="sidebar_extra_content">
+                                            <div class="sidebar_extra_title">30%</div>
+                                            <div class="sidebar_extra_title">off</div>
+                                            <div class="sidebar_extra_subtitle">Buy online now</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer th:insert="/views/layout::footer"></footer>
+</body>
+<th:block th:insert="/views/layout::js"></th:block>
+<script src="/template/js/single.js"></script>
+<script src="/ajax/views/technology.js"></script>
+</html>

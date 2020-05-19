@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/layout::header">
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col" th:replace="admin/layout::app-navbar">
+
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav" th:replace="admin/layout::app-header">
+
+        </div>
+        <div class="right_col" role="main">
+
+            <div class="page-title">
+                <div class="title_left">
+                    <h3 th:text="${assign}"></h3>
+                </div>
+                <div class="title_right">
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table dataTable table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Message</th>
+                            <th>Email</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody th:id="list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="admin/layout::app-footer">
+
+    </footer>
+</div>
+<div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">List comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="message">Subject</label>
+                    <input type="text" class="form-control" id="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <input type="text" class="form-control" id="message" cols="3">
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="contact.replyMail()">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="admin/layout::block-script">
+</th:block>
+<script src="/ajax/admin/contact.js"></script>
+</body>
+</html>
